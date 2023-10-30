@@ -1,0 +1,5 @@
+contextlib
+io==0.3.2
+python-dotenv==0.18.0
+pandas==1.5.3
+openai==0.27.8
