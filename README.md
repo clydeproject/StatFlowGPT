@@ -1,3 +1,3 @@
 # StatFlowGPT
-Conversationally interact with your data. 
+Conversationally interact with your data sets. 
 created by Paartha Nimbalkar.
