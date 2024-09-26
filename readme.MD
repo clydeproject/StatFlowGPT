@@ -13,7 +13,7 @@ StatFlowGPT a conversational data analysis tool that leverages the power of Larg
 
 ## How It Works
 
-StatFlowGPT employs a sophisticated multi-step pipeline to process user queries and generate accurate results:
+StatFlowGPT employs a multi-step pipeline to process user queries and generate accurate results:
 
 ```mermaid
 graph TD
@@ -52,6 +52,7 @@ TOGETHERAI_API_KEY=your_togetherai_api_key
 ## Contributing
 
 We welcome contributions to StatFlowGPT! Please submit pull requests, report issues, and suggest improvements.
+Feel free to contact me at paarthanimbalkar@gmail.com
 
 ## License
 
