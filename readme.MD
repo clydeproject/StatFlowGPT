@@ -33,6 +33,10 @@ graph TD
 4. **Error Correction**: If any errors occur during execution, another instance of the LLM is called to fix the errors.
 5. **Results**: Once the code runs successfully, the answers are summarized and returned.
 
+## To Run
+```bash
+$streamlit run main.py
+```
 ## Installation
 
 ```bash
