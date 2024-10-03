@@ -1,10 +1,21 @@
-from wrappers import OpenAIWrapper,TogetherAPIWrapper
-from utils import Analyst
+from wrappers import OpenAIWrapper,TogetherAPIWrapper,LiteLLMWrapper
+from utils_ import Analyst
 
 import pandas as pd 
 import streamlit as st 
 
-client = TogetherAPIWrapper()
+#can use any model/custom finetuned model for each task,
+#IMPORTANT: CODE GENERATION AND ERROR CORRECTION FOR ANY MODEL IS PROMPT SPECIFIC, THE PROMPTS IN USE(prompt_templates.py) is written for meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo"
+#if changing model,modify the underlying prompts for better performance
+
+model_stack = {
+    "rephrase_query":"together_ai/mistralai/Mistral-7B-Instruct-v0.2",
+    "code_generation":"together_ai/meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo",
+    "error_correction":"together_ai/meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo",
+    }
+
+client = LiteLLMWrapper()
+
 
 custom_css = """
 <style>
@@ -69,14 +80,15 @@ def main():
             if st.button("Analyze", key="analyze_button"):
                 if prompt:
                     with st.spinner("Analyzing your data..."):
-                        model = "meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo"
-                        agent = Analyst(df=df,client=client,model=model)
+                        agent = Analyst(df=df,client=client,model_stack=model_stack)
                         st.markdown("### Analysis Summary")
-                        summary = agent.summarize_results(results=agent.run_chain(prompt),stream=True,model=model,query=prompt)
+                        summary = agent.summarize_results(results=agent.run_chain(prompt),stream=True,model="together_ai/mistralai/Mistral-7B-Instruct-v0.2",query=prompt)
                         summary_placeholder = st.empty()
                         full_summary = ""
                         for chunk in summary:
-                            full_summary += chunk["choices"][0]["text"]
+                            content = chunk.choices[0].delta.content
+                            if content is not None:#to handel stream of a None type chunk at the end of a completion 
+                                full_summary += chunk.choices[0].delta.content
                             summary_placeholder.markdown(full_summary)
                 else:
                     st.warning("Please enter a question to analyze your data.")
