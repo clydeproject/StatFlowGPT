@@ -4,7 +4,7 @@ StatFlowGPT a conversational data analysis tool that leverages the power of Larg
 
 ## Features
 
-- Utilizes LLMs (OpenAI and TogetherAI APIs) in a multi-step pipeline for conversational data analysis
+- Utilizes LLMs, OpenAI,Llama,Mistral or liteLLM, access multiple LLMs (100+ LLMs) in a multi-step pipeline for conversational data analysis
 - Rephrases user queries into precise prompts for better code generation
 - Generates and executes Python code to solve data analysis queries
 - Automatic error correction using LLMs
@@ -51,6 +51,7 @@ To use StatFlowGPT, you need to set up your API keys for OpenAI and TogetherAI. 
 ```
 OPENAI_API_KEY=your_openai_api_key
 TOGETHERAI_API_KEY=your_togetherai_api_key
+#any other api keys
 ```
 
 ## Contributing
